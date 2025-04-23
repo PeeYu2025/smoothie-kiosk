@@ -64,7 +64,7 @@
 
     <div class="button-grid">
       <button type="button" class="smoothie-btn" onclick="selectSmoothie('Chocolate')">
-        <img src="Chocolate.jpeg" alt="Chocolate" />
+        <img src="[Chocolate.jpeg](https://github.com/PeeYu2025/smoothie-kiosk/blob/main/Chocolate.jpg)" alt="Chocolate" />
         Chocolate
       </button>
       <button type="button" class="smoothie-btn" onclick="selectSmoothie('Strawberry')">
