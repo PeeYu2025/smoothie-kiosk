@@ -64,7 +64,7 @@
 
     <div class="button-grid">
       <button type="button" class="smoothie-btn" onclick="selectSmoothie('Chocolate')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Chocolate_milkshake.jpg" alt="Chocolate" />
+        <img src="C:\Users\tanso\Downloads\Chocolate Peanut Butter Smoothie - Jaylynn Little.jpg" alt="Chocolate" />
         Chocolate
       </button>
       <button type="button" class="smoothie-btn" onclick="selectSmoothie('Strawberry')">
