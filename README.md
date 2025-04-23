@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -92,7 +91,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <script>
-    const SCRIPT_URL = "[https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_ID/exec](https://script.google.com/u/0/home/projects/1w14uwwaG0L0kn4t_F3KszE3gm2iF_SRU64pyUIA6f6GXSlKx0i8wUgNJ/edit)"; // Replace with deployed script URL
+    const SCRIPT_URL = "(https://script.google.com/u/0/home/projects/1w14uwwaG0L0kn4t_F3KszE3gm2iF_SRU64pyUIA6f6GXSlKx0i8wUgNJ/edit)"; // Replace with deployed script URL
 
     const qr = new QRious({
       element: document.getElementById("qrcode"),
