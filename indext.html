@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthy Smoothie Kiosk</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .smoothie-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .smoothie-btn img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      pointer-events: none;
+    }
+    #qrcode {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose Your Smoothie</h1>
+  <form id="smoothieForm">
+    <input type="text" name="name" placeholder="Name" required />
+    <input type="text" name="phone" placeholder="Phone Number" required />
+    <input type="time" name="time" placeholder="Time" required />
+    <input type="date" name="expire" placeholder="Expire Date" required />
+
+    <div class="button-grid">
+      <button type="button" class="smoothie-btn" onclick="selectSmoothie('Chocolate')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Chocolate_milkshake.jpg" alt="Chocolate" />
+        Chocolate
+      </button>
+      <button type="button" class="smoothie-btn" onclick="selectSmoothie('Strawberry')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Strawberry_milkshake.jpg" alt="Strawberry" />
+        Strawberry
+      </button>
+      <button type="button" class="smoothie-btn" onclick="selectSmoothie('Vanilla')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Vanilla_milkshake.jpg" alt="Vanilla" />
+        Vanilla
+      </button>
+      <button type="button" class="smoothie-btn" onclick="selectSmoothie('Cookie & Cream')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Oreo_milkshake.jpg" alt="Cookie & Cream" />
+        Cookie & Cream
+      </button>
+      <button type="button" class="smoothie-btn" onclick="selectSmoothie('Banana')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Banana_smoothie.jpg" alt="Banana" />
+        Banana
+      </button>
+    </div>
+
+    <input type="submit" value="Submit" />
+  </form>
+
+  <div id="qrcode"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_ID/exec"; // Replace with deployed script URL
+
+    const qr = new QRious({
+      element: document.getElementById("qrcode"),
+      size: 200,
+    });
+
+    let selectedSmoothie = "";
+
+    function selectSmoothie(flavor) {
+      selectedSmoothie = flavor;
+      alert(`You selected: ${flavor}`);
+    }
+
+    document.getElementById("smoothieForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      formData.append("smoothie", selectedSmoothie);
+
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(result => {
+        alert("Data submitted successfully!");
+        const query = new URLSearchParams(Object.fromEntries(formData.entries())).toString();
+        qr.value = `${window.location.href}?${query}`;
+      })
+      .catch(error => {
+        console.error("Error!", error.message);
+      });
+    });
+  </script>
+</body>
+</html>
